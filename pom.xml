@@ -9,7 +9,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.12</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.eazybytes</groupId>
@@ -21,7 +21,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <lombok.version>1.18.32</lombok.version> <!-- latest stable -->
+        <lombok.version>1.18.32</lombok.version>
     </properties>
 
     <dependencies>
@@ -94,11 +94,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <name>pbinay536/loans:s2</name>
-                    </image>
-                </configuration>
             </plugin>
 
             <!-- Compiler Plugin for Lombok Annotation Processing -->
@@ -113,6 +108,27 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- Jib Plugin for Docker Image -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:21-jdk</image>
+                    </from>
+                    <to>
+                        <image>pbinay536/loans:s2</image>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8090</port>
+                        </ports>
+                        <mainClass>com.eazybytes.loans.LoansApplication</mainClass>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>
